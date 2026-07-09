@@ -153,3 +153,96 @@ function randomResponse(responses) {
     ];
 
 }
+/*---------------------------------------------------------
+ Common Synonyms
+---------------------------------------------------------*/
+
+const RANAI_SYNONYMS = {
+
+hello:[
+"hi",
+"hey",
+"hii",
+"helo",
+"yo",
+"sup",
+"greetings"
+],
+
+bye:[
+"goodbye",
+"see you",
+"cya",
+"later"
+],
+
+thanks:[
+"thank you",
+"thx",
+"ty",
+"thanks"
+],
+
+html:[
+"hypertext markup language"
+],
+
+css:[
+"stylesheet",
+"style sheet"
+],
+
+javascript:[
+"js"
+],
+
+python:[
+"py"
+],
+
+artificialintelligence:[
+"ai"
+],
+
+machinelearning:[
+"ml"
+]
+
+};
+
+/*---------------------------------------------------------
+ Expand Synonyms
+---------------------------------------------------------*/
+
+function expandSynonyms(input){
+
+input = normalizeText(input);
+
+Object.keys(RANAI_SYNONYMS).forEach(main=>{
+
+RANAI_SYNONYMS[main].forEach(word=>{
+
+if(input.includes(word))
+input += " " + main;
+
+});
+
+});
+
+return input;
+
+}
+
+/*---------------------------------------------------------
+ Smart Normalize
+---------------------------------------------------------*/
+
+function preprocess(text){
+
+text = normalizeText(text);
+
+text = expandSynonyms(text);
+
+return text;
+
+}
